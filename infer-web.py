@@ -1691,8 +1691,7 @@ def simple_cli_main():
         command = f"{config.simple_cli_args.exp_name} \
                     {config.simple_cli_args.trainset_dir} \
                     {config.simple_cli_args.sample_rate} \
-                    {config.simple_cli_args.n_workers}" \
-                    {config.simple_cli_args.logs_dir}
+                    {config.simple_cli_args.n_workers}"
         func = cli_pre_process
     elif config.simple_cli == "extract-feature":
         command = f"{config.simple_cli_args.exp_name} \
@@ -1701,8 +1700,7 @@ def simple_cli_main():
                     {int(config.simple_cli_args.is_pitch_guidance)} \
                     {config.simple_cli_args.f0_method} \
                     {config.simple_cli_args.crepe_hop_length} \
-                    {config.simple_cli_args.rvc_version}" \
-                    {config.simple_cli_args.logs_dir}
+                    {config.simple_cli_args.rvc_version}"
         func = cli_extract_feature
     elif config.simple_cli == "train":
         command = f"{config.simple_cli_args.exp_name} \
@@ -1716,8 +1714,7 @@ def simple_cli_main():
                     {int(config.simple_cli_args.latest_ckpt_only)} \
                     {int(config.simple_cli_args.cache_trainset)} \
                     {int(config.simple_cli_args.save_small_model)} \
-                    {config.simple_cli_args.rvc_version}" \
-                    {config.simple_cli_args.logs_dir}
+                    {config.simple_cli_args.rvc_version}"
         func = cli_train
     elif config.simple_cli == "train-feature":
         command = f"{config.simple_cli_args.exp_name} \
@@ -1729,8 +1726,7 @@ def simple_cli_main():
                     {config.simple_cli_args.sample_rate} \
                     {int(config.simple_cli_args.is_pitch_guidance)} \
                     {config.simple_cli_args.model_info} \
-                    {config.simple_cli_args.rvc_version}" \
-                    {config.simple_cli_args.logs_dir}
+                    {config.simple_cli_args.rvc_version}"
         func = cli_extract_model
     elif config.simple_cli == "uvr":
         command = f"{config.simple_cli_args.uvr5_weight_name} \

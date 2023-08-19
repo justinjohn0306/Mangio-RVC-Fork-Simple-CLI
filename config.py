@@ -65,9 +65,6 @@ class Config:
 
         # Arguments for simple cli usage.
         parser.add_argument(
-            "--logs_dir", type=str, default="", help="Logs directory",
-        )    
-        parser.add_argument(
             "--exp_name", type=str, default="mi-test", help="Experiment name"
         )
         parser.add_argument(
@@ -258,7 +255,7 @@ class Config:
 
         cmd_opts = parser.parse_args()
 
-        args_to_assign = ['logs_dir', 'exp_name', 'trainset_dir', 'sample_rate', 'n_workers', 'gpu',
+        args_to_assign = ['exp_name', 'trainset_dir', 'sample_rate', 'n_workers', 'gpu',
                   'is_pitch_guidance', 'f0_method', 'crepe_hop_length', 'rvc_version',
                   'speaker_id', 'save_epoch_iter', 'epochs', 'batch_size',
                   'latest_ckpt_only', 'cache_trainset', 'save_small_model',
