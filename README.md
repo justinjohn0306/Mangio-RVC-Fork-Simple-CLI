@@ -1,3 +1,40 @@
+# 7/28 Changelog:
+- Undo SQL change for the sake of stability, uses csv now
+- Merging checkpoints bug has been resolved
+
+# 7/26 Changelog:
+- Fixed the cli inferencing traceback.
+- SQL Databases implemented for formanting training stop.
+- Gradio browser tab renamed to `Mangio-RVC-Web 💻`.
+- Rudimentary functions from `infer-web.py` removed.
+- Formanting now accepts any audio format, as long as it is supported by FFmpeg.
+
+# 7/25 Changelog:
+- Better MacOS installation script. For inference, all that needs to be done is running the `run.sh` from the extracted zip folder, where it will install Python 3.8, Homebrew, and other dependencies for you automatically. M1 Macs are natively supported for GPU acceleration, and training should work if you choose to download the pretrained models.
+
+# 7/23 Changelog:
+- Fp16 detection now works how it did before the last RVC beta; no more training slowdowns compared to how it was before then
+- Logging on TensorBoard is now done per epoch. It logs every X steps in an epoch; therefore each point on the graph is now represented per-epoch.
+- Updated UI to include placeholders.
+- Certain sliders now appear only when needed.
+- Step 2b (feature extract) is hidden if pitch guidance is disabled.
+- Unnecessary radios have been replaced with checkboxes.
+
+# 7/22 Changelog:
+- Experimental Formant Shift using StftPitchShift(tried using praat with praatio but to no avail)
+- Added `Stop Training` button when training, no need to restart RVC every time you want to stop the training of a model!
+- Auto-detect Index path for models selected + Auto-detect paths, no more default values like this: `E:\codes\py39\vits_vc_gpu_train\logs\mi-test-1key\total_fea.npy`, We're getting Root Dir and subfolders using 
+```python 
+os.path.abspath(os.getcwd())
+``` 
+- Audio files dropdown by autodetecting files in `/audios/` folder 
+- More stable version of Gradio(3.34.0) with support of Themes
+- Removed `One Click Training` button in `Training` Tab, since it was glitchy and has confused a lot of users. 
+- Changed default training settings to be more optimal for newer users. 
+- Auto-open TensorBoard localhost URL when `tensor-launch.py` is executed 
+- RMVPE implemented in both inferencing and training
+
+
 <div align="center">
 <h1>Mangio-RVC-Fork with v2 Support! 💻 </h1>
 A fork of an easy-to-use SVC framework based on VITS with top1 retrieval 💯. In general, this fork provides a CLI interface in addition. And also gives you more f0 methods to use, as well as a personlized 'hybrid' f0 estimation method using nanmedian. <br><br>
@@ -246,6 +283,41 @@ cd Mangio-RVC-Fork
 make tensorboard
 ```
 Then click the tensorboard link it provides and refresh the data.
+
+## Change Gradio Theme:
+
+- [OPTIONAL] Change Gradio's theme:
+    1. Open `infer-web.py` in any code/text editing software (e.g. `notepad++`, `notepad`, `vscode`, etc)
+  
+    2a. Press Ctrl+F and search for `with gr.Blocks(`, select the one that's not fully commented
+  
+    2b. Go to line `1842`, you'll see the `with gr.Blocks(theme='HaleyCH/HaleyCH_Theme') as app:`
+  
+    3. Go to [Gradio Theme Gallery](https://huggingface.co/spaces/gradio/theme-gallery):
+       
+    3.1 Select any theme you like (e.g. [this one](https://huggingface.co/spaces/freddyaboulton/dracula_revamped))
+  
+    3.2 Look at the top of the page
+  
+    ![image](https://github.com/alexlnkp/Mangio-RVC-Tweaks/assets/79400603/59e3e6a9-bdda-4ede-8161-00ee957c1715)
+
+    3.3 Copy theme variable(in this case, it's `theme='freddyaboulton/dracula_revamped'`)
+  
+    4. Replace `theme='HaleyCH/HaleyCH_Theme'` in `infer-web.py` with any value of a theme from [Gradio Theme Gallery](https://huggingface.co/spaces/gradio/theme-gallery)
+
+
+# Formant Shift Explanation
+
+![image](https://github.com/Mangio621/Mangio-RVC-Fork/assets/79400603/300ebce2-36c7-4761-b1dd-b31403ad2cd1)
+
+- ### Click `Apply` button every time you change the values for inferencing.
+
+- ### As the name implies, you can only use `wav` files so far, also it is very slow, so be patient.
+
+- ### If you added a new `preset.txt` in the `\formantshiftcfg\` folder, click button with refresh emoji
+
+- ### If the preset you selected somehow got edited, by pressing refresh emoji button you'll update values, by grabbing them from the file
+
 
 # Other 
 

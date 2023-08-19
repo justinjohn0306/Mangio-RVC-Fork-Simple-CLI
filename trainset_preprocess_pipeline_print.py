@@ -17,6 +17,10 @@ import multiprocessing
 from my_utils import load_audio
 import tqdm
 
+DoFormant = False
+Quefrency = 1.0
+Timbre = 1.0
+
 mutex = multiprocessing.Lock()
 f = open("%s/preprocess.log" % exp_dir, "a+")
 
@@ -77,7 +81,7 @@ class PreProcess:
 
     def pipeline(self, path, idx0):
         try:
-            audio = load_audio(path, self.sr)
+            audio = load_audio(path, self.sr, DoFormant, Quefrency, Timbre)
             # zero phased digital filter cause pre-ringing noise...
             # audio = signal.filtfilt(self.bh, self.ah, audio)
             audio = signal.lfilter(self.bh, self.ah, audio)
@@ -97,12 +101,14 @@ class PreProcess:
                         idx1 += 1
                         break
                 self.norm_write(tmp_audio, idx0, idx1)
-            #println("%s->Suc." % path)
+            # println("%s->Suc." % path)
         except:
             println("%s->%s" % (path, traceback.format_exc()))
 
     def pipeline_mp(self, infos, thread_n):
-        for path, idx0 in tqdm.tqdm(infos, position=thread_n, leave=True, desc="thread:%s" % thread_n):
+        for path, idx0 in tqdm.tqdm(
+            infos, position=thread_n, leave=True, desc="thread:%s" % thread_n
+        ):
             self.pipeline(path, idx0)
 
     def pipeline_mp_inp_dir(self, inp_root, n_p):
